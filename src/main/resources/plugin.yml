@@ -1,0 +1,14 @@
+name: FancyMorphs
+description: $description
+author: OliverHD
+version: $version
+main: de.oliver.fancymorphs.FancyMorphs
+api-version: 1.19
+folia-supported: true
+load: POSTWORLD
+
+commands:
+  FancyMorphs:
+    permission: FancyMorphs.admin
+  Morph:
+    permission: FancyMorphs.morph
