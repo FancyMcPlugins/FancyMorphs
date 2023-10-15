@@ -20,12 +20,13 @@ allprojects {
     }
 }
 
-val mcVersion = "1.20.1"
+val mcVersion = "1.20.2"
 
 dependencies {
     paperweight.paperDevBundle("$mcVersion-R0.1-SNAPSHOT")
 
-    implementation("de.oliver:FancyLib:1.0.4")
+    compileOnly("de.oliver:FancyNpcs:2.0.4")
+    implementation("de.oliver:FancyLib:1.0.5")
 }
 
 tasks {
