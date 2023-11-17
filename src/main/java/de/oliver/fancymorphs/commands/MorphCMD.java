@@ -14,6 +14,7 @@ import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
@@ -21,6 +22,11 @@ public class MorphCMD implements CommandExecutor, TabCompleter {
 
     @Override
     public @Nullable List<String> onTabComplete(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
+        if (args.length == 1) {
+            return Arrays.stream(EntityType.values())
+                    .map(e -> e.name().toLowerCase())
+                    .toList();
+        }
         return null;
     }
 
@@ -35,7 +41,7 @@ public class MorphCMD implements CommandExecutor, TabCompleter {
 
         String entityName = args[0];
 
-        if (entityName.equalsIgnoreCase("none")) {
+        if (entityName.equalsIgnoreCase("none") || entityName.equalsIgnoreCase("player")) {
             if (morph == null) {
                 MessageHelper.error(p, "You are already unmorphed");
                 return false;
@@ -66,7 +72,7 @@ public class MorphCMD implements CommandExecutor, TabCompleter {
             morph.removeForAll();
         }
 
-        FancyMorphs.getInstance().getMorphManager().spawnForEveryoneElse(npc, p);
+        FancyMorphs.getInstance().getMorphManager().spawnForEveryoneElse(npc, p.getUniqueId());
 
         FancyMorphs.getInstance().getMorphManager().register(p.getUniqueId(), npc);
 

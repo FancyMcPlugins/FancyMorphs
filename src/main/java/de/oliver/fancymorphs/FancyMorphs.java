@@ -1,12 +1,14 @@
 package de.oliver.fancymorphs;
 
 import de.oliver.fancylib.FancyLib;
+import de.oliver.fancylib.Metrics;
 import de.oliver.fancylib.serverSoftware.ServerSoftware;
 import de.oliver.fancylib.serverSoftware.schedulers.BukkitScheduler;
 import de.oliver.fancylib.serverSoftware.schedulers.FancyScheduler;
 import de.oliver.fancylib.serverSoftware.schedulers.FoliaScheduler;
 import de.oliver.fancymorphs.commands.FancyMorphsCMD;
 import de.oliver.fancymorphs.commands.MorphCMD;
+import de.oliver.fancymorphs.listeners.PlayerJoinQuitListener;
 import de.oliver.fancymorphs.listeners.PlayerMoveListener;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.PluginManager;
@@ -38,11 +40,14 @@ public class FancyMorphs extends JavaPlugin {
     public void onEnable() {
         FancyLib.setPlugin(INSTANCE);
 
+        Metrics metrics = new Metrics(INSTANCE, 20323);
+
         getCommand("FancyMorphs").setExecutor(new FancyMorphsCMD());
         getCommand("Morph").setExecutor(new MorphCMD());
 
         PluginManager pluginManager = Bukkit.getPluginManager();
         pluginManager.registerEvents(new PlayerMoveListener(), INSTANCE);
+        pluginManager.registerEvents(new PlayerJoinQuitListener(), INSTANCE);
     }
 
     @Override

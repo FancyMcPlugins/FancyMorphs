@@ -1,7 +1,6 @@
 plugins {
     id("java")
     id("maven-publish")
-    id("io.papermc.paperweight.userdev") version "1.5.5"
     id("xyz.jpenilla.run-paper") version "2.1.0"
     id("com.github.johnrengelman.shadow") version "8.1.1"
 }
@@ -23,7 +22,7 @@ allprojects {
 val mcVersion = "1.20.2"
 
 dependencies {
-    paperweight.paperDevBundle("$mcVersion-R0.1-SNAPSHOT")
+    compileOnly("io.papermc.paper:paper-api:${mcVersion}-R0.1-SNAPSHOT")
 
     compileOnly("de.oliver:FancyNpcs:2.0.5")
     implementation("de.oliver:FancyLib:1.0.5")
