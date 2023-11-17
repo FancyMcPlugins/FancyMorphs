@@ -1,6 +1,6 @@
 ![](fancymorphs_title.png)
 
-#                         
+#                             
 
 ![Latest Version](https://img.shields.io/github/v/release/FancyMcPlugins/FancyMorphs?style=flat-square)
 [![Generic badge](https://img.shields.io/badge/folia-supported-green.svg)](https://shields.io/)
@@ -12,6 +12,8 @@ Simple, lightweight and fast morph plugin using [packets](https://wiki.vg/Protoc
 
 **Only for minecraft server version 1.19.4 - 1.20.2**<br>
 _Using [paper](https://papermc.io/downloads) is highly recommended_
+
+**IMPORTANT: This plugin requires [FancyNpcs](https://github.com/FancyMcPlugins/FancyNpcs) to be on the server!**
 
 # Commands
 
