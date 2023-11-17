@@ -1,6 +1,6 @@
 ![](fancymorphs_title.png)
 
-#                       
+#                         
 
 ![Latest Version](https://img.shields.io/github/v/release/FancyMcPlugins/FancyMorphs?style=flat-square)
 [![Generic badge](https://img.shields.io/badge/folia-supported-green.svg)](https://shields.io/)
@@ -13,25 +13,15 @@ Simple, lightweight and fast morph plugin using [packets](https://wiki.vg/Protoc
 **Only for minecraft server version 1.19.4 - 1.20.2**<br>
 _Using [paper](https://papermc.io/downloads) is highly recommended_
 
-## Get the plugin
+# Commands
 
-### Stable versions
+- /Morph (entity type) - morph yourself into any mob
 
-TODO
+# Known issues / todos
 
-## Features
-
-TODO
-
-## Documentation
-
-### Plugin
-
-TODO
-
-### Api
-
-TODO
+- Force morph others
+- Pass damage to the entity through to player
+- Keep morph after server restart
 
 ### Build from source
 
