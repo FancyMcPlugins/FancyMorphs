@@ -23,7 +23,7 @@ public class FancyMorphs extends JavaPlugin {
 
     public FancyMorphs() {
         INSTANCE = this;
-        scheduler = ServerSoftware.isBukkit() ? new BukkitScheduler(INSTANCE) : new FoliaScheduler(INSTANCE);
+        scheduler = ServerSoftware.isFolia() ? new FoliaScheduler(INSTANCE) : new BukkitScheduler(INSTANCE);
         morphManager = new MorphManager();
     }
 
