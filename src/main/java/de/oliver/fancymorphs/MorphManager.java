@@ -38,7 +38,7 @@ public class MorphManager {
     public void spawnForEveryoneElse(Npc npc, UUID e) {
         FancyMorphs.getInstance().getScheduler().runTaskAsynchronously(() -> {
             for (Player p : Bukkit.getOnlinePlayers()) {
-                if (p.getUniqueId() == e && npc.getEyeHeight() > .75f) continue;
+                if (p.getUniqueId().equals(e) && npc.getEyeHeight() > .75f) continue;
 
                 npc.spawn(p);
                 npc.spawn(p);
