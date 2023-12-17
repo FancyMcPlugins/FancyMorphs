@@ -17,15 +17,19 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Stream;
 
 public class MorphCMD implements CommandExecutor, TabCompleter {
 
     @Override
     public @Nullable List<String> onTabComplete(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
         if (args.length == 1) {
-            return Arrays.stream(EntityType.values())
-                    .map(e -> e.name().toLowerCase())
-                    .toList();
+            return Stream.concat(
+                    Arrays.stream(EntityType.values())
+                            .map(e -> e.name().toLowerCase())
+                            .filter(type -> sender.hasPermission("fancymorphs.morph." + type.toLowerCase()) || sender.hasPermission("fancymorphs.morph.*")),
+                    Stream.of("player", "none")
+            ).toList();
         }
         return null;
     }
@@ -56,9 +60,15 @@ public class MorphCMD implements CommandExecutor, TabCompleter {
             return true;
         }
 
-        p.setInvisible(true);
 
         EntityType type = EntityType.valueOf(entityName.toUpperCase());
+
+        if (!(p.hasPermission("fancymorphs.morph." + type.name().toLowerCase()) || p.hasPermission("fancymorphs.morph.*"))) {
+            MessageHelper.error(p, "You don't have permission to morph as this entity type.");
+            return false;
+        }
+
+        p.setInvisible(true);
 
         NpcData npcData = new NpcData(UUID.randomUUID().toString(), p.getUniqueId(), p.getLocation());
         npcData.setCollidable(false);
