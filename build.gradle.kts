@@ -19,12 +19,12 @@ allprojects {
     }
 }
 
-val mcVersion = "1.20.2"
+val mcVersion = "1.20.4"
 
 dependencies {
     compileOnly("io.papermc.paper:paper-api:${mcVersion}-R0.1-SNAPSHOT")
 
-    compileOnly("de.oliver:FancyNpcs:2.0.5")
+    compileOnly("de.oliver:FancyNpcs:2.0.6.1")
     implementation("de.oliver:FancyLib:1.0.5")
 }
 

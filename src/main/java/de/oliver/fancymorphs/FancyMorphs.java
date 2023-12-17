@@ -8,6 +8,7 @@ import de.oliver.fancylib.serverSoftware.schedulers.FancyScheduler;
 import de.oliver.fancylib.serverSoftware.schedulers.FoliaScheduler;
 import de.oliver.fancymorphs.commands.FancyMorphsCMD;
 import de.oliver.fancymorphs.commands.MorphCMD;
+import de.oliver.fancymorphs.commands.UnmorphCMD;
 import de.oliver.fancymorphs.listeners.PlayerJoinQuitListener;
 import de.oliver.fancymorphs.listeners.PlayerMoveListener;
 import org.bukkit.Bukkit;
@@ -44,6 +45,7 @@ public class FancyMorphs extends JavaPlugin {
 
         getCommand("FancyMorphs").setExecutor(new FancyMorphsCMD());
         getCommand("Morph").setExecutor(new MorphCMD());
+        getCommand("Unmorph").setExecutor(new UnmorphCMD());
 
         PluginManager pluginManager = Bukkit.getPluginManager();
         pluginManager.registerEvents(new PlayerMoveListener(), INSTANCE);
