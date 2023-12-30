@@ -1,3 +1,6 @@
+import java.io.BufferedReader
+import java.io.InputStreamReader
+
 plugins {
     id("java")
     id("maven-publish")
@@ -82,11 +85,19 @@ tasks {
     processResources {
         filteringCharset = Charsets.UTF_8.name() // We want UTF-8 for everything
         val props = mapOf(
-            "version" to project.version,
             "description" to project.description,
+            "version" to project.version,
+            "hash" to getCurrentCommitHash(),
+            "build" to (System.getenv("BUILD_ID") ?: "").ifEmpty { "undefined" }
         )
+
         inputs.properties(props)
+
         filesMatching("plugin.yml") {
+            expand(props)
+        }
+
+        filesMatching("version.yml") {
             expand(props)
         }
     }
@@ -94,4 +105,17 @@ tasks {
 
 java {
     toolchain.languageVersion.set(JavaLanguageVersion.of(17))
+}
+
+fun getCurrentCommitHash(): String {
+    val process = ProcessBuilder("git", "rev-parse", "HEAD").start()
+    val reader = BufferedReader(InputStreamReader(process.inputStream))
+    val commitHash = reader.readLine()
+    reader.close()
+    process.waitFor()
+    if (process.exitValue() == 0) {
+        return commitHash ?: ""
+    } else {
+        throw IllegalStateException("Failed to retrieve the commit hash.")
+    }
 }
