@@ -41,10 +41,15 @@ public class MorphCMD implements CommandExecutor, TabCompleter {
             return false;
         }
 
+        // perhaps unmorph if no arguments are provided (?
+        if (args.length == 0) {
+            MessageHelper.error(sender, "Usage: /morph <entity-type>");
+            return false;
+        }
+
         Npc morph = FancyMorphs.getInstance().getMorphManager().getNpc(p.getUniqueId());
 
         String entityName = args[0];
-
         if (entityName.equalsIgnoreCase("none") || entityName.equalsIgnoreCase("player")) {
             if (morph == null) {
                 MessageHelper.error(p, "You are already unmorphed");
@@ -61,7 +66,13 @@ public class MorphCMD implements CommandExecutor, TabCompleter {
         }
 
 
-        EntityType type = EntityType.valueOf(entityName.toUpperCase());
+        final EntityType type;
+        try {
+            type = EntityType.valueOf(entityName.toUpperCase());
+        } catch (IllegalArgumentException ignored) {
+            MessageHelper.error(sender, "No entity type could be found for name: " + entityName);
+            return false;
+        }
 
         if (!(p.hasPermission("fancymorphs.morph." + type.name().toLowerCase()) || p.hasPermission("fancymorphs.morph.*"))) {
             MessageHelper.error(p, "You don't have permission to morph as this entity type.");
