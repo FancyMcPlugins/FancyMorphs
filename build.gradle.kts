@@ -4,8 +4,8 @@ import java.io.InputStreamReader
 plugins {
     id("java")
     id("maven-publish")
-    id("xyz.jpenilla.run-paper") version "2.1.0"
-    id("com.github.johnrengelman.shadow") version "8.1.1"
+    id("xyz.jpenilla.run-paper") version "2.3.1"
+    id("io.github.goooler.shadow") version "8.1.8"
 }
 
 allprojects {
@@ -16,7 +16,7 @@ allprojects {
     repositories {
         mavenLocal()
         mavenCentral()
-        maven("https://papermc.io/repo/repository/maven-public/")
+        maven("https://repo.papermc.io/repository/maven-public/")
         maven("https://repo.fancyplugins.de/releases")
         maven("https://repo.extendedclip.com/content/repositories/placeholderapi/")
     }
@@ -32,6 +32,10 @@ dependencies {
 tasks {
     runServer {
         minecraftVersion(findProperty("minecraftVersion").toString())
+
+        downloadPlugins {
+            modrinth("FancyNpcs", "2.3.1")
+        }
     }
 
     shadowJar {
@@ -75,7 +79,7 @@ tasks {
 
         // Set the release flag. This configures what version bytecode the compiler will emit, as well as what JDK APIs are usable.
         // See https://openjdk.java.net/jeps/247 for more information.
-        options.release.set(17)
+        options.release.set(21)
     }
 
     javadoc {
@@ -104,7 +108,7 @@ tasks {
 }
 
 java {
-    toolchain.languageVersion.set(JavaLanguageVersion.of(17))
+    toolchain.languageVersion.set(JavaLanguageVersion.of(21))
 }
 
 fun getCurrentCommitHash(): String {

@@ -45,7 +45,7 @@ public class FancyMorphs extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        FancyLib.setPlugin(INSTANCE);
+        new FancyLib(this);
 
         Metrics metrics = new Metrics(INSTANCE, 20323);
 
@@ -77,7 +77,7 @@ public class FancyMorphs extends JavaPlugin {
             }
 
             getLogger().warning("""
-                                                            
+                    
                     -------------------------------------------------------
                     You are not using the latest version the FancyMorphs plugin.
                     Please update to the newest version (%s).
